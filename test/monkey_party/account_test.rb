@@ -2,9 +2,8 @@ require "test_helper"
 
 class MonkeyParty::AccountTest < Test::Unit::TestCase
   context "logging in" do
-    should "require a user name"
-    should "require a password"
-    should "return an api key"
+    should "return an api key" do
+    end
   end
 
   context "adding an api key" do
