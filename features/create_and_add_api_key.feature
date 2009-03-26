@@ -23,3 +23,4 @@ I want to login and generate an api key
     And I have a valid api key
     When I attempt to expire the key
     Then I should be successful
+

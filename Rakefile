@@ -15,6 +15,18 @@ rescue LoadError
   puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
 end
 
+begin
+  require 'cucumber'
+  require 'cucumber/rake/task'
+
+  Cucumber::Rake::Task.new(:features) do |t|
+    t.cucumber_opts = "--format pretty" # Any valid command line option can go here.
+  end
+
+rescue LoadError
+  puts "Cucumber not installed. You will not be able to run features"
+end
+
 require 'rake/rdoctask'
 Rake::RDocTask.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
