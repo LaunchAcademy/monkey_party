@@ -2,7 +2,11 @@ require "test_helper"
 
 class MonkeyParty::AccountTest < Test::Unit::TestCase
   context "logging in" do
+    setup do
+
+    end
     should "return an api key" do
+      
     end
   end
 
