@@ -27,6 +27,10 @@ module MonkeyParty
         account.keys << response
         account.user_name = user_name
         account.password = password
+
+        #set a global api key
+        configatron.mailchimp.api_key = response
+
         account
       end
     end

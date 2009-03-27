@@ -13,9 +13,34 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
 
     end
 
+    should "have an id" do
+
+    end
+
+    should "have a web_id" do
+
+    end
+
+    should "have a name" do
+
+    end
+
+    should "have a date of creation" do
+
+    end
+
+    should "have a member count" do
+
+    end
     
   end
 
-  context "getting the lists" do
+  context "lists" do
+    should "retrieving all of the lists" do
+      lists = MonkeyParty::List.all
+      assert_kind_of Array, lists
+      assert_not_nil lists[0]
+      assert_not_nil lists[0].name
+    end
   end
 end

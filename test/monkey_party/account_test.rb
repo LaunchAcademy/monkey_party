@@ -15,6 +15,10 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
     should "set the user_name" do
       assert_not_nil @account.user_name
     end
+
+    should "set the global api key" do
+      assert_not_nil configatron.mailchimp.api_key
+    end
   end
 
   context "logging in with invalid credentials" do

@@ -2,6 +2,8 @@ require "rubygems"
 require "httparty"
 require "happymapper"
 
+require "configatron"
+
 require "monkey_party/error"
 
 require "monkey_party/base"
