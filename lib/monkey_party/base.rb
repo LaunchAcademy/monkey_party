@@ -13,8 +13,14 @@ module MonkeyParty
       def get(path, options = {})
         #fix the format because Mail Chimp doesn't pass the proper header
         options[:format] = :xml
-        super["MCAPI"]
+        super
       end
+
+      protected
+      def api_key
+        configatron.mailchimp.api_key
+      end
+
     end
   end
 end

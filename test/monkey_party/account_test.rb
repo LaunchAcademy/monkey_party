@@ -3,6 +3,8 @@ require "test_helper"
 class MonkeyParty::AccountTest < Test::Unit::TestCase
   context "successfully logging in" do
     setup do
+      configatron.mailchimp.api_key
+
       mock_login_response(true)
       
       @account = MonkeyParty::Account.login(@user_name, @password)

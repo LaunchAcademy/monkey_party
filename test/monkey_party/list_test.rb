@@ -37,10 +37,17 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
 
   context "lists" do
     should "retrieving all of the lists" do
+      mock_all_response
       lists = MonkeyParty::List.all
       assert_kind_of Array, lists
       assert_not_nil lists[0]
       assert_not_nil lists[0].name
     end
+  end
+
+  private
+  def mock_all_response
+    mock_response("apikey=2491541245g978jkasf&method=lists&output=xml",
+      "lists")
   end
 end

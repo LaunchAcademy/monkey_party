@@ -18,7 +18,7 @@ module MonkeyParty
           :method   => "login", 
           :username => user_name, 
           :password => password
-        })
+        })["MCAPI"]
 
         account = new
         
@@ -41,7 +41,7 @@ module MonkeyParty
         :username => self.user_name,
         :password => self.password,
         :apikey   => self.api_key
-      })
+      })["MCAPI"]
 
       raise MonkeyParty::Error::AuthenticationError if response.is_a?(Array)
 

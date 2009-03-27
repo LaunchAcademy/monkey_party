@@ -14,6 +14,8 @@ require 'monkey_party'
 
 FakeWeb.allow_net_connect = false
 
+configatron.mailchimp.api_key = "api_key"
+
 class Test::Unit::TestCase
   protected
   def mock_response(path, fixture)
