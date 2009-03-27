@@ -14,12 +14,22 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
       assert_not_nil @account.api_key
     end
 
-    should "set the user_name"
+    should "set the user_name" do
+
+    end
   end
 
   context "adding an api key" do
-    should "require a user name"
-    should "require a password"
-    should "require an api key"
+    should "require a user name" do
+
+    end
+    
+    should "require a password" do
+
+    end
+
+    should "require an api key" do
+
+    end
   end
 end
