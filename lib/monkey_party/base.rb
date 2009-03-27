@@ -13,7 +13,7 @@ module MonkeyParty
       def get(path, options = {})
         #fix the format because Mail Chimp doesn't pass the proper header
         options[:format] = :xml
-        super
+        super["MCAPI"]
       end
     end
   end

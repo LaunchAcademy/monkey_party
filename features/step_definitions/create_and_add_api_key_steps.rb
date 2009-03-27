@@ -14,14 +14,13 @@ end
 When /^I attempt to login with incorrect credentials$/ do
   begin
     @account = MonkeyParty::Account.login(@mailchimp_user_name,
-      @mailchimp_password + "FAIL")
-  rescue Exception => @error
+      "FAIL")
+  rescue MonkeyParty::Error::AuthenticationError => @exception
   end
 end
 
 Then /^I should get an error$/ do
-  assert_not_nil @error
-  assert_kind_of MonkeyParty::Error::AuthenticationError, @error
+  assert_not_nil @exception
 end
 
 Then /^I should get an api key$/ do
