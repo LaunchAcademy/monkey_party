@@ -18,7 +18,7 @@ class Test::Unit::TestCase
   protected
   def mock_response(path, fixture)
     FakeWeb.register_uri(
-      "http://api.mailchimp.com/1.1?#{path}&output=xml",
+      "http://api.mailchimp.com/1.1?#{path}",
       :response => xml_fixture_path(fixture))
   end
 

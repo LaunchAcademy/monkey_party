@@ -27,8 +27,11 @@ Then /^I should get an api key$/ do
   assert_not_nil @account.api_key
 end
 
+Given /^I have logged in$/ do
+  @mailchimp_user_name = configatron.mailchimp.user_name
+  @mailchimp_password  = configatron.mailchimp.password
 
-
-
-
+  @account = MonkeyParty::Account.login(@mailchimp_user_name,
+    @mailchimp_password)
+end
 

@@ -31,16 +31,32 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
   end
 
   context "adding an api key" do
-    should "require a user name" do
-
+    setup do
+      @account = MonkeyParty::Account.new(
+        :user_name => "test",
+        :password  => "password",
+        :api_key   => "api_key")
     end
-    
-    should "require a password" do
 
+    should "return an api key" do
+     mock_response("password=#{@account.password}&" +
+      "apikey=#{@account.api_key}&method=apikeyAdd&" + 
+      "output=xml&username=#{@account.user_name}",
+      "successful_login")
+     
+      response = @account.add_api_key
+      assert_kind_of String, response
     end
 
-    should "require an api key" do
+    should "raise an error if I don't have the right credentials" do
+      mock_response("password=#{@account.password}&" +
+        "apikey=#{@account.api_key}&method=apikeyAdd&" + 
+        "output=xml&username=#{@account.user_name}",
+        "failed_login")
 
+      assert_raise MonkeyParty::Error::AuthenticationError do
+        @account.add_api_key
+      end
     end
   end
 
@@ -49,7 +65,8 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
     @user_name = "test_user"
     @password = "password"
       
-    mock_response("method=login&username=#{@user_name}&password=#{@password}",
+    mock_response("method=login&username=#{@user_name}" + 
+      "&password=#{@password}&output=xml",
     successful ? "successful_login" : "failed_login")
 
   end

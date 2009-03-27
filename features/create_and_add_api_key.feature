@@ -19,9 +19,3 @@ I want to login and generate an api key
     When I attempt to add an api key
     Then I should be successful
 
-  Scenario: Expire a key
-    Given I have a valid mailchimp account
-    And I have a valid api key
-    When I attempt to expire the key
-    Then I should be successful
-
