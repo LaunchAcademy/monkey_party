@@ -53,7 +53,7 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
 
       should "add the resulting api key to extra keys" do
         response = @account.add_api_key
-        assert @account.extra_keys.include?(response)
+        assert @account.keys.include?(response)
       end
     end
 

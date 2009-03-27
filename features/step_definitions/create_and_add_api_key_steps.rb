@@ -24,7 +24,7 @@ Then /^I should get an error$/ do
 end
 
 Then /^I should get an api key$/ do
-  assert_not_nil @account.api_key
+  assert @account.keys.size == 1
 end
 
 Given /^I have logged in$/ do
@@ -33,5 +33,13 @@ Given /^I have logged in$/ do
 
   @account = MonkeyParty::Account.login(@mailchimp_user_name,
     @mailchimp_password)
+end
+
+When /^I attempt to add an api key$/ do
+  @additional_api_key = @account.add_api_key
+end
+
+Then /^I should be successful$/ do
+  assert @account.keys.include?(@additional_api_key) 
 end
 

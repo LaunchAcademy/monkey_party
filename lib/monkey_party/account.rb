@@ -1,10 +1,15 @@
 module MonkeyParty
   class Account < Base
-    attr_accessor :user_name, :api_key, :password, :extra_keys
+    attr_accessor :user_name, :password, :keys
     
     def initialize(attrs = {})
+      self.keys ||= []
+      self.keys << attrs.delete(:api_key) if attrs[:api_key]
       super
-      self.extra_keys ||= []
+    end
+
+    def api_key
+      self.keys[0]
     end
 
     class << self
@@ -19,7 +24,7 @@ module MonkeyParty
         
         raise MonkeyParty::Error::AuthenticationError if response.is_a?(Array)
 
-        account.api_key = response
+        account.keys << response
         account.user_name = user_name
         account.password = password
         account
@@ -36,7 +41,7 @@ module MonkeyParty
 
       raise MonkeyParty::Error::AuthenticationError if response.is_a?(Array)
 
-      self.extra_keys << response
+      self.keys << response
       response
     end
   end
