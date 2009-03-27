@@ -1,3 +1,4 @@
+require "ruby-debug"
 module MonkeyParty
   class Base
     include HTTParty
@@ -6,6 +7,14 @@ module MonkeyParty
 
     def initialize(attrs = {})
       attrs.each{ |key, value| self.send("#{key}=", value) }
+    end
+
+    class << self
+      def get(path, options = {})
+        #fix the format because Mail Chimp doesn't pass the proper header
+        options[:format] = :xml
+        super
+      end
     end
   end
 end
