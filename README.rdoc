@@ -1,6 +1,8 @@
 = monkey_party
 
-Description goes here.
+An extremely young API for interacting with the MailChimp API
+
+Uses the excellent HTTParty and HappyMapper tools and is well tested
 
 == TODO
  * Clean up after cucumber features are run
