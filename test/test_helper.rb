@@ -2,6 +2,10 @@ require 'rubygems'
 require 'test/unit'
 require 'shoulda'
 
+begin 
+  require "redgreen"
+rescue LoadError; end
+
 require 'fake_web'
 
 $LOAD_PATH.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))

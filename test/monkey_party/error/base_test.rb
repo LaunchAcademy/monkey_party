@@ -1,5 +1,5 @@
 require "test_helper"
-require "ruby-debug"
+
 class MonkeyParty::Error::BaseTest < Test::Unit::TestCase
   include MonkeyParty::Error
 
