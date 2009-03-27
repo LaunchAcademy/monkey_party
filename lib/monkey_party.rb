@@ -1,5 +1,6 @@
 require "rubygems"
 require "httparty"
+require "happymapper"
 
 require "monkey_party/error"
 
