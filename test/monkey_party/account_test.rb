@@ -7,15 +7,16 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
       @password = "password"
       mock_response("method=login&username=#{@user_name}&password=#{@password}",
         "successful_login")
+
+      @account = MonkeyParty::Account.login(@user_name, @password)
     end
 
     should "return an api key" do
-      @account = MonkeyParty::Account.login(@user_name, @password)
       assert_not_nil @account.api_key
     end
 
     should "set the user_name" do
-
+      assert_not_nil @account.user_name
     end
   end
 

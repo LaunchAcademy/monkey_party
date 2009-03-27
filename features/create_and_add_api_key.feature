@@ -9,6 +9,7 @@ I want to login and generate an api key
     Then I should get an api key
 
   Scenario: Failed Login
+    Given I have a valid mailchimp account
     When I attempt to login with incorrect credentials
     Then I should get an error
 
