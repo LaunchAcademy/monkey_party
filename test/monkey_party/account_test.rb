@@ -38,24 +38,37 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
         :api_key   => "api_key")
     end
 
-    should "return an api key" do
-     mock_response("password=#{@account.password}&" +
-      "apikey=#{@account.api_key}&method=apikeyAdd&" + 
-      "output=xml&username=#{@account.user_name}",
-      "successful_login")
-     
-      response = @account.add_api_key
-      assert_kind_of String, response
+    context "with proper credentials" do
+      setup do
+        mock_response("password=#{@account.password}&" +
+          "apikey=#{@account.api_key}&method=apikeyAdd&" + 
+          "output=xml&username=#{@account.user_name}",
+          "successful_login")
+      end
+
+      should "return an api key" do
+        response = @account.add_api_key
+        assert_kind_of String, response
+      end
+
+      should "add the resulting api key to extra keys" do
+        response = @account.add_api_key
+        assert @account.extra_keys.include?(response)
+      end
     end
 
-    should "raise an error if I don't have the right credentials" do
-      mock_response("password=#{@account.password}&" +
+    context "with improper credentials" do
+      setup do
+       mock_response("password=#{@account.password}&" +
         "apikey=#{@account.api_key}&method=apikeyAdd&" + 
         "output=xml&username=#{@account.user_name}",
         "failed_login")
-
-      assert_raise MonkeyParty::Error::AuthenticationError do
-        @account.add_api_key
+      end
+      
+      should "raise an error if I don't have the right credentials" do
+        assert_raise MonkeyParty::Error::AuthenticationError do
+          @account.add_api_key
+        end
       end
     end
   end
