@@ -3,3 +3,4 @@
 coverage
 rdoc
 pkg
+features/support/mailchimp/account.yml
