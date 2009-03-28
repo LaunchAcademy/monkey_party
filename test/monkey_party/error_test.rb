@@ -1,20 +1,18 @@
 require "test_helper"
 
-class MonkeyParty::Error::BaseTest < Test::Unit::TestCase
-  include MonkeyParty::Error
-
+class MonkeyParty::ErrorTest < Test::Unit::TestCase
   context "An error" do
     setup do
       error_body = File.read(xml_fixture_path("failed_login")).gsub(/.*<MCAPI/m, "<MCAPI")
-      @error = Base.parse(error_body)
+      @error = MonkeyParty::Error.parse(error_body)
     end
 
     should "have a code" do
       assert_not_nil @error.code
     end
 
-    should "have an error" do
-      assert_not_nil @error.error
+    should "have an error message" do
+      assert_not_nil @error.message
     end
   end
 end

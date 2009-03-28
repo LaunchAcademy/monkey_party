@@ -26,11 +26,10 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
   context "logging in with invalid credentials" do
     setup do
       mock_login_response(false)
-
     end
 
     should "raise an error" do
-      assert_raises MonkeyParty::Error::AuthenticationError do 
+      assert_raises MonkeyParty::Error do 
         MonkeyParty::Account.login(@user_name, @password)
       end
     end
@@ -72,7 +71,7 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
       end
       
       should "raise an error if I don't have the right credentials" do
-        assert_raise MonkeyParty::Error::AuthenticationError do
+        assert_raise MonkeyParty::Error do
           @account.add_api_key
         end
       end

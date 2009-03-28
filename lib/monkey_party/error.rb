@@ -1,4 +1,9 @@
-require "monkey_party/error/base"
+module MonkeyParty
+  class Error < Exception
+    include HappyMapper
 
-require "monkey_party/error/authentication_error"
-
+    tag 'MCAPI'
+    element :message, String, :tag => "error"
+    element :code, Integer
+  end
+end

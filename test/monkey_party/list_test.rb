@@ -43,11 +43,15 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
       assert_not_nil lists[0]
       assert_not_nil lists[0].name
     end
+
+    should "raise an error if something goes wrong" do
+      mock_all_response(false)
+    end
   end
 
   private
-  def mock_all_response
+  def mock_all_response(success = true)
     mock_response("apikey=2491541245g978jkasf&method=lists&output=xml",
-      "lists")
+      success ? "successful_lists" : "failed_lists")
   end
 end

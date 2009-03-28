@@ -13,7 +13,12 @@ module MonkeyParty
       def get(path, options = {})
         #fix the format because Mail Chimp doesn't pass the proper header
         options[:format] = :xml
-        super
+        result = super
+        
+        if result.body =~ /<error/i
+          raise MonkeyParty::Error.parse(result.body)
+        end
+        result
       end
 
       protected

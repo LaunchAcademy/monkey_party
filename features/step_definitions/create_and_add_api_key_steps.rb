@@ -15,7 +15,7 @@ When /^I attempt to login with incorrect credentials$/ do
   begin
     @account = MonkeyParty::Account.login(@mailchimp_user_name,
       "FAIL")
-  rescue MonkeyParty::Error::AuthenticationError => @exception
+  rescue MonkeyParty::Error => @exception
   end
 end
 

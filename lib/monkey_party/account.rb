@@ -22,8 +22,6 @@ module MonkeyParty
 
         account = new
         
-        raise MonkeyParty::Error::AuthenticationError if response.is_a?(Array)
-
         account.keys << response
         account.user_name = user_name
         account.password = password
@@ -42,8 +40,6 @@ module MonkeyParty
         :password => self.password,
         :apikey   => self.api_key
       })["MCAPI"]
-
-      raise MonkeyParty::Error::AuthenticationError if response.is_a?(Array)
 
       self.keys << response
       response
