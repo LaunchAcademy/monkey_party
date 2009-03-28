@@ -46,6 +46,9 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
 
     should "raise an error if something goes wrong" do
       mock_all_response(false)
+      assert_raises MonkeyParty::Error do 
+        lists = MonkeyParty::List.all
+      end
     end
   end
 
