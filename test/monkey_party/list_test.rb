@@ -50,6 +50,11 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
         lists = MonkeyParty::List.all
       end
     end
+
+    should "find by name" do
+      mock_all_response
+      assert_equal "Testing", MonkeyParty::List.find_by_name("Testing").name
+    end
   end
 
   private

@@ -21,7 +21,7 @@ module MonkeyParty
 
       def find_by_name(name)
         all.each do |list|
-          return list if list.name.downcase = name.downcase
+          return list if list.name.downcase == name.downcase
         end
 
         return nil
