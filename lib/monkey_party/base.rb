@@ -21,7 +21,6 @@ module MonkeyParty
         result
       end
 
-      protected
       def api_key
         configatron.mailchimp.api_key
       end

@@ -9,6 +9,21 @@ module MonkeyParty
     element :date_created, Time
     element :member_count, Integer
 
+    def create_subscribers(array_of_subscribers, options = {})
+      options[:double_optin]      ||= true
+      options[:update_existing]   ||= false
+      options[:replace_interests] ||= true
+
+      response = self.class.get("", :query => {
+         :apikey            => self.class.api_key,
+         :id                => self.id,
+         :method            => "listBatchSubscribe",
+         :batch             => array_of_subscribers,
+         :double_optin      => options[:dobule_optin],
+         :update_existing   => options[:update_existing],
+         :replace_interests => options[:replace_interests]
+      })
+    end
     class << self
       def all
         response = get("", :query => {

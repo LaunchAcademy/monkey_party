@@ -35,6 +35,21 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
     
   end
 
+  context "subscribing" do
+
+    setup do
+      list = MonkeyParty::List.all[0]
+      list.create_subscribers([
+        {"EMAIL" => "user@example.com"},
+        {"EMAIL" => "user3@example.com"}
+      ])
+    end
+
+    should "return an array of subscribers" do
+
+    end
+  end
+
   context "lists" do
     should "retrieving all of the lists" do
       mock_all_response
