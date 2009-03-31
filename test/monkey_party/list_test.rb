@@ -42,20 +42,17 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
       mock_response("double_optin=&update_existing=false&method=listBatchSubscribe&replace_interests=true&batch[1][EMAIL]=user3%40example.com&batch[1][FNAME]=Another%20User&output=xml&batch[0][EMAIL]=user%40example.com&batch[0][FNAME]=A%20User&id=d40bbc3056&apikey=2491541245g978jkasf", "successful_subscribe")
 
       list = MonkeyParty::List.all[0]
-      list.create_subscribers([
-        {
-          "EMAIL" => "user@example.com",
-          "FNAME" => "A User"
-        },
-        {
-          "EMAIL" => "user3@example.com",
-          "FNAME" => "Another User"
-        }
-      ])
+      subscribers = []
+      subscribers << MonkeyParty::Subscriber.new("user@example.com", {:f_name => "A User"})
+      subscribers << MonkeyParty::Subscriber.new("user3@example.com", {:f_name => "Another User"})
+      
+      created_subscribers = list.create_subscribers(subscribers)
+
     end
 
     should "return an array of subscribers" do
 
+      assert_instance MonkeyParty::Subscriber, created_subscribers
     end
   end
 
