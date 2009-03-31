@@ -15,7 +15,7 @@ module MonkeyParty
         options[:format] = :xml
         result = super
         
-        if result.body =~ /<error/i
+        if result.body =~ /<error /i
           raise MonkeyParty::Error.parse(result.body)
         end
         result

@@ -13,16 +13,28 @@ module MonkeyParty
       options[:double_optin]      ||= true
       options[:update_existing]   ||= false
       options[:replace_interests] ||= true
+      
+      batch_hash = {}
+      index = 0
+      array_of_subscribers.each do |s|
+        batch_hash["batch[#{index}]"] = s
+        index += 1
+      end
 
       response = self.class.get("", :query => {
          :apikey            => self.class.api_key,
          :id                => self.id,
          :method            => "listBatchSubscribe",
-         :batch             => array_of_subscribers,
          :double_optin      => options[:dobule_optin],
          :update_existing   => options[:update_existing],
          :replace_interests => options[:replace_interests]
-      })
+      }.merge(batch_hash))
+
+      #response[1] is the error count
+      if response[1] > 0
+
+      end
+      array_of_subscribers
     end
     class << self
       def all

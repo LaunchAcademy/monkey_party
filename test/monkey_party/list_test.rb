@@ -38,10 +38,19 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
   context "subscribing" do
 
     setup do
+      mock_all_response
+      mock_response("double_optin=&update_existing=false&method=listBatchSubscribe&replace_interests=true&batch[1][EMAIL]=user3%40example.com&batch[1][FNAME]=Another%20User&output=xml&batch[0][EMAIL]=user%40example.com&batch[0][FNAME]=A%20User&id=d40bbc3056&apikey=2491541245g978jkasf", "successful_subscribe")
+
       list = MonkeyParty::List.all[0]
       list.create_subscribers([
-        {"EMAIL" => "user@example.com"},
-        {"EMAIL" => "user3@example.com"}
+        {
+          "EMAIL" => "user@example.com",
+          "FNAME" => "A User"
+        },
+        {
+          "EMAIL" => "user3@example.com",
+          "FNAME" => "Another User"
+        }
       ])
     end
 
