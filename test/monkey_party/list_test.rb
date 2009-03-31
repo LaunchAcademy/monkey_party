@@ -43,16 +43,19 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
 
       list = MonkeyParty::List.all[0]
       subscribers = []
-      subscribers << MonkeyParty::Subscriber.new("user@example.com", {:f_name => "A User"})
-      subscribers << MonkeyParty::Subscriber.new("user3@example.com", {:f_name => "Another User"})
+      subscribers << MonkeyParty::Subscriber.new("user@example.com", {:fname => "A User"})
+      subscribers << MonkeyParty::Subscriber.new("user3@example.com", {:fname => "Another User"})
       
-      created_subscribers = list.create_subscribers(subscribers)
+      @created_subscribers = list.create_subscribers(subscribers)
 
     end
 
     should "return an array of subscribers" do
+      assert_kind_of MonkeyParty::Subscriber, @created_subscribers[0]
+    end
 
-      assert_instance MonkeyParty::Subscriber, created_subscribers
+    context "failed subscriptions" do
+      
     end
   end
 

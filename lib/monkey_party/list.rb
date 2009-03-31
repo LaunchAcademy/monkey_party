@@ -17,7 +17,7 @@ module MonkeyParty
       batch_hash = {}
       index = 0
       array_of_subscribers.each do |s|
-        batch_hash["batch[#{index}]"] = s
+        batch_hash["batch[#{index}]"] = s.to_mailchimp_hash
         index += 1
       end
 
@@ -31,8 +31,8 @@ module MonkeyParty
       }.merge(batch_hash))
 
       #response[1] is the error count
-      if response[1] > 0
-
+      if response["mcapi"][1] > 0
+         
       end
       array_of_subscribers
     end
