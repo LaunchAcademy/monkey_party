@@ -28,8 +28,10 @@ class MonkeyParty::SubscriberTest < Test::Unit::TestCase
       intended_hash = {}
       intended_hash["EMAIL"] = @email
       @merge_vars.each do |key, value|
-        @merge_vars[key.to_s.upcase] = value
+        intended_hash[key.to_s.upcase] = value
       end
+
+      assert_equal intended_hash, @subscriber.to_mailchimp_hash
     end
   end
 end
