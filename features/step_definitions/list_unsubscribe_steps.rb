@@ -7,9 +7,10 @@ Given /^"([^\"]*)" is a subscriber to the "([^\"]*)" list$/ do |email, list|
 end
 
 When /^I attempt to unsubscribe "([^\"]*)" from the "([^\"]*)" list$/ do |email, list|
-  @list.destroy_subscribers([@subscriber])
+  @subscriber = @list.destroy_subscribers([@subscriber])[0]
 end
 
 Then /^the unsubscription should submit successfully$/ do
+  assert @subscriber.valid?
 end
 
