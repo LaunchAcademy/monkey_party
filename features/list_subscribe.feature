@@ -9,4 +9,4 @@ Scenario: Email subscription
   And a list named "Testing"
   And I have logged in
   When I attempt to subscribe "user@example.com" to the "Testing" list
-  Then I should be successful
+  Then the subscription should submit successfully
