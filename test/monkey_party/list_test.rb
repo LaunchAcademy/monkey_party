@@ -89,15 +89,15 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
     setup do
       mock_all_response
       @list = MonkeyParty::List.all[0]
+      @unsubscribers = [
+        MonkeyParty::Subscriber.new("user@example.com"),
+        MonkeyParty::Subscriber.new("user3@example.com")
+      ]
     end
 
     context "successfully" do
       setup do
         mock_unsubscription
-        @unsubscribers = [
-          MonkeyParty::Subscriber.new("user@example.com"),
-          MonkeyParty::Subscriber.new("user3@example.com")
-        ]
 
         @resultant_unsubscribers = @list.destroy_subscribers(@unsubscribers)
       end
@@ -110,7 +110,14 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
     end
 
     context "resulting in errors(s)" do
+      setup do
+        mock_unsubscription(false)
+        @resultant_unsubscribers = @list.destroy_subscribers(@unsubscribers)
+      end
 
+      should "have an invalid subscriber" do
+        assert !@resultant_unsubscribers[0].valid?
+      end
     end
   end
 

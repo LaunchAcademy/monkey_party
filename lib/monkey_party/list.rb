@@ -29,15 +29,9 @@ module MonkeyParty
 
       #response[1] is the error count
       if !response["MCAPI"].nil? && response["MCAPI"][1] > 0
-        #parse errors and update subscriber 
-        error_nodes = XML::Parser.string(response.body).parse.root.find("/MCAPI/errors/struct")
-        error_nodes.each do |n|
-          array_of_subscribers[n.attributes["key"].to_i].error = 
-            MonkeyParty::Error.new(:message => n.find_first("message").content, 
-              :code => n.find_first("code").content)
-        end
-
+        attach_errors_to_subscribers(array_of_subscribers, response.body)
       end
+
       array_of_subscribers
     end
 
@@ -57,6 +51,10 @@ module MonkeyParty
         :id => self.id,
         :method => "listBatchUnsubscribe"
       }.merge(options).merge(batch_hash))
+
+      if !response["MCAPI"].nil? && response["MCAPI"][1] > 0
+        attach_errors_to_subscribers(array_of_unsubscribers, response.body)
+      end
 
       array_of_unsubscribers
     end
@@ -78,6 +76,17 @@ module MonkeyParty
 
         return nil
       end
+    end
+
+    private
+    def attach_errors_to_subscribers(subscribers, response)
+        #parse errors and update subscriber 
+        error_nodes = XML::Parser.string(response).parse.root.find("/MCAPI/errors/struct")
+        error_nodes.each do |n|
+          subscribers[n.attributes["key"].to_i].error = 
+            MonkeyParty::Error.new(:message => n.find_first("message").content, 
+              :code => n.find_first("code").content)
+        end
     end
   end
 end
