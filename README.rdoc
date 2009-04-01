@@ -5,6 +5,7 @@ An extremely young API for interacting with the MailChimp API
 Uses the excellent HTTParty and HappyMapper tools and is well tested
 
 == TODO
+ * Batch subscribe does not allow you to resubscribe members - implement individual subscribe method
  * Clean up after cucumber features are run
 
 == Copyright
