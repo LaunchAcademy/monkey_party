@@ -39,23 +39,50 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
 
     setup do
       mock_all_response
-      mock_response("double_optin=&update_existing=false&method=listBatchSubscribe&replace_interests=true&batch[1][EMAIL]=user3%40example.com&batch[1][FNAME]=Another%20User&output=xml&batch[0][EMAIL]=user%40example.com&batch[0][FNAME]=A%20User&id=d40bbc3056&apikey=2491541245g978jkasf", "successful_subscribe")
 
-      list = MonkeyParty::List.all[0]
-      subscribers = []
-      subscribers << MonkeyParty::Subscriber.new("user@example.com", {:fname => "A User"})
-      subscribers << MonkeyParty::Subscriber.new("user3@example.com", {:fname => "Another User"})
+      @list = MonkeyParty::List.all[0]
       
-      @created_subscribers = list.create_subscribers(subscribers)
+      @subscribers = []
+      @subscribers << MonkeyParty::Subscriber.new("user@example.com", 
+        {:fname => "A User"})
+      @subscribers << MonkeyParty::Subscriber.new("user3@example.com", 
+        {:fname => "Another User"})
+      
 
     end
 
-    should "return an array of subscribers" do
-      assert_kind_of MonkeyParty::Subscriber, @created_subscribers[0]
+    context "successful subscriptions" do
+      setup do
+        mock_subscription
+        @resultant_subscribers = @list.create_subscribers(@subscribers)
+      end
+
+      should "return an array of subscribers" do
+        assert_kind_of MonkeyParty::Subscriber, @resultant_subscribers[0]
+      end
+
+      should "indicate that each subscription was valid" do
+        @resultant_subscribers.each do |s|
+          assert s.valid?
+        end
+      end
     end
+
 
     context "failed subscriptions" do
-      
+      setup do
+        mock_subscription(false)
+        @resultant_subscribers = @list.create_subscribers(@subscribers)
+      end
+
+      should "indicate have invalid subscribers" do
+        assert !@resultant_subscribers[0].valid?
+      end
+
+      should "have a subscriber with an error" do
+        assert_not_nil @resultant_subscribers[0].error
+        assert_kind_of MonkeyParty::Error, @resultant_subscribers[0].error
+      end
     end
   end
 
@@ -85,5 +112,14 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
   def mock_all_response(success = true)
     mock_response("apikey=2491541245g978jkasf&method=lists&output=xml",
       success ? "successful_lists" : "failed_lists")
+  end
+
+  def mock_subscription(success = true)
+    mock_response("double_optin=&update_existing=false&" +
+      "method=listBatchSubscribe&replace_interests=true&" + 
+      "batch[1][EMAIL]=user3%40example.com&batch[1][FNAME]=Another%20User&" + 
+      "output=xml&batch[0][EMAIL]=user%40example.com&" +
+      "batch[0][FNAME]=A%20User&id=d40bbc3056&apikey=2491541245g978jkasf", 
+      success ? "successful_subscribe" : "failed_subscribe")
   end
 end

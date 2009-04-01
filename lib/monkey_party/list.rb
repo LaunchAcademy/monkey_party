@@ -31,8 +31,15 @@ module MonkeyParty
       }.merge(batch_hash))
 
       #response[1] is the error count
-      if response["mcapi"][1] > 0
-         
+      if !response["MCAPI"].nil? && response["MCAPI"][1] > 0
+        #parse errors and update subscriber 
+        error_nodes = XML::Parser.string(response.body).parse.root.find("/MCAPI/errors/struct")
+        error_nodes.each do |n|
+          array_of_subscribers[n.attributes["key"].to_i].error = 
+            MonkeyParty::Error.new(:message => n.find_first("message").content, 
+              :code => n.find_first("code").content)
+        end
+
       end
       array_of_subscribers
     end

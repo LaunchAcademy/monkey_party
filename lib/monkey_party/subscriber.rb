@@ -1,10 +1,11 @@
 module MonkeyParty
   class Subscriber
-    attr_accessor :email, :merge_fields
+    attr_accessor :email, :merge_fields, :error
 
     def initialize(email, merge_fields = {})
       self.email = email
       self.merge_fields = merge_fields
+      self.error = nil
     end
 
     def to_h
@@ -20,6 +21,10 @@ module MonkeyParty
       end
 
       chimp_hash
+    end
+
+    def valid?
+      self.error.nil?
     end
   end
 end
