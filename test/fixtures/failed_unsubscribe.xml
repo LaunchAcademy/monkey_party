@@ -1,0 +1,19 @@
+HTTP/1.1 200 OK
+Date: Wed, 04 Feb 2009 03:42:26 GMT
+Server: Apache/2.2.3 (Debian) mod_python/3.2.10 Python/2.4.4 PHP/5.2.0-8+etch11
+Content-Type: application/xml
+Transfer-Encoding: chunked
+
+<MCAPI type="array">
+<success_count type="integer">0</success_count>
+<error_count type="integer">1</error_count>
+<errors type="array">
+<struct key="0" type="array">
+<code type="integer">232</code>
+<message type="string">There is no record of &quot;user3@example.com&quot; in the database</message>
+<email type="string">user3@example.com</email>
+</struct>
+
+</errors>
+</MCAPI>
+

@@ -35,7 +35,7 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
     
   end
 
-  context "subscribing" do
+  context "when subscribing" do
 
     setup do
       mock_all_response
@@ -51,7 +51,7 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
 
     end
 
-    context "successful subscriptions" do
+    context "successfully" do
       setup do
         mock_subscription
         @resultant_subscribers = @list.create_subscribers(@subscribers)
@@ -68,14 +68,13 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
       end
     end
 
-
-    context "failed subscriptions" do
+    context "resulting in error(s)" do
       setup do
         mock_subscription(false)
         @resultant_subscribers = @list.create_subscribers(@subscribers)
       end
 
-      should "indicate have invalid subscribers" do
+      should "have invalid subscribers" do
         assert !@resultant_subscribers[0].valid?
       end
 
@@ -83,6 +82,35 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
         assert_not_nil @resultant_subscribers[0].error
         assert_kind_of MonkeyParty::Error, @resultant_subscribers[0].error
       end
+    end
+  end
+
+  context "when unsubscribing" do
+    setup do
+      mock_all_response
+      @list = MonkeyParty::List.all[0]
+    end
+
+    context "successfully" do
+      setup do
+        mock_unsubscription
+        @unsubscribers = [
+          MonkeyParty::Subscriber.new("user@example.com"),
+          MonkeyParty::Subscriber.new("user3@example.com")
+        ]
+
+        @resultant_unsubscribers = @list.destroy_subscribers(@unsubscribers)
+      end
+
+      should "have all valid subscribers" do
+        @resultant_unsubscribers.each do |s|
+          assert s.valid?
+        end
+      end
+    end
+
+    context "resulting in errors(s)" do
+
     end
   end
 
@@ -115,11 +143,20 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
   end
 
   def mock_subscription(success = true)
-    mock_response("double_optin=&update_existing=false&" +
-      "method=listBatchSubscribe&replace_interests=true&" + 
-      "batch[1][EMAIL]=user3%40example.com&batch[1][FNAME]=Another%20User&" + 
-      "output=xml&batch[0][EMAIL]=user%40example.com&" +
-      "batch[0][FNAME]=A%20User&id=d40bbc3056&apikey=2491541245g978jkasf", 
-      success ? "successful_subscribe" : "failed_subscribe")
+    mock_response(
+    "double_optin=true&update_existing=false&replace_interests=true&" +
+    "method=listBatchSubscribe&batch[1][EMAIL]=user3%40example.com&" +
+    "batch[1][FNAME]=Another%20User&output=xml&" +
+    "batch[0][EMAIL]=user%40example.com&batch[0][FNAME]=A%20User&"+
+    "apikey=2491541245g978jkasf&id=d40bbc3056",
+    success ? "successful_subscribe" : "failed_subscribe")
+  end
+
+  def mock_unsubscription(success = true)
+    mock_response(
+      "delete_member=false&send_goodbye=true&method=listBatchUnsubscribe&" +
+      "send_notify=false&output=xml&apikey=2491541245g978jkasf&id=d40bbc3056&" +
+      "emails[0]=user3%40example.com",
+      success ? "successful_unsubscribe" : "failed_unsubscribe")
   end
 end

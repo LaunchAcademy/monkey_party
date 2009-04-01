@@ -25,10 +25,7 @@ module MonkeyParty
          :apikey            => self.class.api_key,
          :id                => self.id,
          :method            => "listBatchSubscribe",
-         :double_optin      => options[:dobule_optin],
-         :update_existing   => options[:update_existing],
-         :replace_interests => options[:replace_interests]
-      }.merge(batch_hash))
+      }.merge(options).merge(batch_hash))
 
       #response[1] is the error count
       if !response["MCAPI"].nil? && response["MCAPI"][1] > 0
@@ -44,12 +41,24 @@ module MonkeyParty
       array_of_subscribers
     end
 
-    def destroy_subscribers(array_of_subscribers, options = {})
+    def destroy_subscribers(array_of_unsubscribers, options = {})
       options[:delete_member] ||= false
       options[:send_goodbye]  ||= true
       options[:send_notify]   ||= false
 
+      batch_hash = {}
+      index = 0
+      array_of_unsubscribers.each do |s|
+        batch_hash["emails[#{index}]"] = s.email
+      end
 
+      response = self.class.get("", :query => {
+        :apikey => self.class.api_key,
+        :id => self.id,
+        :method => "listBatchUnsubscribe"
+      }.merge(options).merge(batch_hash))
+
+      array_of_unsubscribers
     end
 
     class << self
