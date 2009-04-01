@@ -45,7 +45,11 @@ module MonkeyParty
     end
 
     def destroy_subscribers(array_of_subscribers, options = {})
-      
+      options[:delete_member] ||= false
+      options[:send_goodbye]  ||= true
+      options[:send_notify]   ||= false
+
+
     end
 
     class << self

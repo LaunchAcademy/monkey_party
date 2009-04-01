@@ -9,6 +9,6 @@ Scenario: Email unsubscription
   And a list named "Testing"
   And I have logged in
   And "user@example.com" is a subscriber to the "Testing" list
-  When I attempt to unsubscribe "user@example.com" to the "Testing" list
-  Then the unsubscription should submit successfully
+  When I attempt to unsubscribe "user@example.com" from the "Testing" list
+  Then the unsubscription should be successful
 
