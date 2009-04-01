@@ -48,7 +48,7 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
         mock_response("password=#{@account.password}&" +
           "apikey=#{@account.api_key}&method=apikeyAdd&" + 
           "output=xml&username=#{@account.user_name}",
-          "successful_login")
+          "login_successful")
       end
 
       should "return an api key" do
@@ -67,7 +67,7 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
        mock_response("password=#{@account.password}&" +
         "apikey=#{@account.api_key}&method=apikeyAdd&" + 
         "output=xml&username=#{@account.user_name}",
-        "failed_login")
+        "login_failed")
       end
       
       should "raise an error if I don't have the right credentials" do
@@ -85,7 +85,7 @@ class MonkeyParty::AccountTest < Test::Unit::TestCase
       
     mock_response("method=login&username=#{@user_name}" + 
       "&password=#{@password}&output=xml",
-    successful ? "successful_login" : "failed_login")
+    successful ? "login_successful" : "login_failed")
 
   end
 end

@@ -3,7 +3,7 @@ require "test_helper"
 class MonkeyParty::ErrorTest < Test::Unit::TestCase
   context "An error" do
     setup do
-      error_body = File.read(xml_fixture_path("failed_login")).gsub(/.*<MCAPI/m, "<MCAPI")
+      error_body = File.read(xml_fixture_path("login_failed")).gsub(/.*<MCAPI/m, "<MCAPI")
       @error = MonkeyParty::Error.parse(error_body)
     end
 

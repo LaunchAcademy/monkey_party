@@ -146,7 +146,7 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
   private
   def mock_all_response(success = true)
     mock_response("apikey=2491541245g978jkasf&method=lists&output=xml",
-      success ? "successful_lists" : "failed_lists")
+      success ? "lists_successful" : "lists_failed")
   end
 
   def mock_subscription(success = true)
@@ -156,7 +156,7 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
     "batch[1][FNAME]=Another%20User&output=xml&" +
     "batch[0][EMAIL]=user%40example.com&batch[0][FNAME]=A%20User&"+
     "apikey=2491541245g978jkasf&id=d40bbc3056",
-    success ? "successful_subscribe" : "failed_subscribe")
+    success ? "batch_subscribe_successful" : "batch_subscribe_failed")
   end
 
   def mock_unsubscription(success = true)
@@ -164,6 +164,6 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
       "delete_member=false&send_goodbye=true&method=listBatchUnsubscribe&" +
       "send_notify=false&output=xml&apikey=2491541245g978jkasf&id=d40bbc3056&" +
       "emails[0]=user3%40example.com",
-      success ? "successful_unsubscribe" : "failed_unsubscribe")
+      success ? "batch_unsubscribe_successful" : "batch_unsubscribe_failed")
   end
 end
