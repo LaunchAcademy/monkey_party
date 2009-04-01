@@ -10,3 +10,4 @@ Scenario: Email subscription
   And I have logged in
   When I attempt to subscribe "user@example.com" to the "Testing" list
   Then the subscription should submit successfully
+

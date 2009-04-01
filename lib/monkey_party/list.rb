@@ -43,6 +43,11 @@ module MonkeyParty
       end
       array_of_subscribers
     end
+
+    def destroy_subscribers(array_of_subscribers, options = {})
+      
+    end
+
     class << self
       def all
         response = get("", :query => {
