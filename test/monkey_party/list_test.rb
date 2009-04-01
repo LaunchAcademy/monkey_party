@@ -118,6 +118,10 @@ class MonkeyParty::ListTest < Test::Unit::TestCase
       should "have an invalid subscriber" do
         assert !@resultant_unsubscribers[0].valid?
       end
+
+      should "have a usable error for the invalid subscriber" do
+        assert_not_nil @resultant_unsubscribers[0].error.message
+      end
     end
   end
 

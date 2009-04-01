@@ -80,13 +80,16 @@ module MonkeyParty
 
     private
     def attach_errors_to_subscribers(subscribers, response)
-        #parse errors and update subscriber 
-        error_nodes = XML::Parser.string(response).parse.root.find("/MCAPI/errors/struct")
-        error_nodes.each do |n|
-          subscribers[n.attributes["key"].to_i].error = 
-            MonkeyParty::Error.new(:message => n.find_first("message").content, 
-              :code => n.find_first("code").content)
-        end
+      #parse errors and update subscriber 
+      error_nodes = XML::Parser.string(response).parse.root.find("/MCAPI/errors/struct")
+      error_nodes.each do |n|
+
+        sub_error = MonkeyParty::Error.new
+        sub_error.message = n.find_first("message").content
+        sub_error.code    = n.find_first("code").content
+
+        subscribers[n.attributes["key"].to_i].error = sub_error
+      end
     end
   end
 end
