@@ -9,6 +9,9 @@ begin
     gem.email = "dpickett@enlightsolutions.com"
     gem.homepage = "http://github.com/dpickett/monkey_party"
     gem.authors = ["Dan Pickett"]
+    gem.add_dependency("jnunemaker-httparty", ">= 0.3.1")
+    gem.add_dependency("jnunemaker-happymapper", ">= 0.2.2")
+    gem.add_dependency("configatron", ">= 2.2.2")
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
