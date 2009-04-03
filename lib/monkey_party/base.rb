@@ -2,7 +2,7 @@ require "ruby-debug"
 module MonkeyParty
   class Base
     include HTTParty
-    base_uri 'http://api.mailchimp.com/1.1/'
+    base_uri 'http://api.mailchimp.com/1.2/'
     default_params :output => "xml"
 
     def initialize(attrs = {})

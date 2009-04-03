@@ -7,7 +7,7 @@ When /^I attempt to subscribe "([^\"]*)" to the "([^\"]*)" list$/ do |email, lis
     [MonkeyParty::Subscriber.new(email,
       :first_name => "John",
       :last_name  => "Smith"
-    )], :update_existing => true)
+    )], :update_existing => true, :double_optin => true)
 end
 
 Then /^the subscription should submit successfully$/ do
