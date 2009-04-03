@@ -10,9 +10,11 @@ module MonkeyParty
     element :member_count, Integer
 
     def create_subscribers(array_of_subscribers, options = {})
-      options[:double_optin]      ||= true
-      options[:update_existing]   ||= false
-      options[:replace_interests] ||= true
+      options = {
+        :double_optin => true,
+        :update_existing => false,
+        :replace_interests => true
+      }.merge(options)
       
       batch_hash = {}
       index = 0
@@ -36,9 +38,11 @@ module MonkeyParty
     end
 
     def destroy_subscribers(array_of_unsubscribers, options = {})
-      options[:delete_member] ||= false
-      options[:send_goodbye]  ||= true
-      options[:send_notify]   ||= false
+      options = {
+        :delete_member => false,
+        :send_goodbye  => true,
+        :send_notify   => false
+      }.merge(options)
 
       batch_hash = {}
       index = 0
