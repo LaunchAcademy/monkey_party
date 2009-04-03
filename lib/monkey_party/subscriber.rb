@@ -17,7 +17,7 @@ module MonkeyParty
     def to_mailchimp_hash
       chimp_hash = {}
       self.to_h.each do |key, value|
-        chimp_hash[key.to_s.upcase] = value
+        chimp_hash[key.to_s.upcase[0..9]] = value
       end
 
       chimp_hash

@@ -33,5 +33,12 @@ class MonkeyParty::SubscriberTest < Test::Unit::TestCase
 
       assert_equal intended_hash, @subscriber.to_mailchimp_hash
     end
+
+    should "limit merge vars to 10 characters" do
+      @merge_vars = {:a_really_long_merge_var => "LONG ONE"}
+      @subscriber = MonkeyParty::Subscriber.new(@email, @merge_vars)
+      assert @subscriber.to_mailchimp_hash.keys.include?("A_REALLY_L")
+
+    end
   end
 end
