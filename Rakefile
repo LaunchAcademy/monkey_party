@@ -22,14 +22,8 @@ begin
   require 'cucumber'
   require 'cucumber/rake/task'
 
-  Cucumber::Rake::Task.new(:features) do |t|
+  Cucumber::Rake::Task.new(:cucumber) do |t|
     t.cucumber_opts = "--format pretty" # Any valid command line option can go here.
-    t.step_pattern = [
-      "features/support/env",
-      "features/support/mailchimp/account",
-      "features/support/mailchimp/cleaner",
-      "features/step_definitions/**.rb"
-    ]
   end
 
 rescue LoadError

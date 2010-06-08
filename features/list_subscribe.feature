@@ -8,6 +8,6 @@ Scenario: Email subscription
   Given I have a valid mailchimp account
   And a list named "Testing"
   And I have logged in
-  When I attempt to subscribe "user@example.com" to the "Testing" list
+  When I attempt to subscribe "user@enlightsolutions.com" to the "Testing" list
   Then the subscription should submit successfully
 

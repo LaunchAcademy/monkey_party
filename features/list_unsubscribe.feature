@@ -8,7 +8,7 @@ Scenario: Email unsubscription
   Given I have a valid mailchimp account
   And a list named "Testing"
   And I have logged in
-  And "user@example.com" is a subscriber to the "Testing" list
-  When I attempt to unsubscribe "user@example.com" from the "Testing" list
+  And "user@enlightsolutions.com" is a subscriber to the "Testing" list
+  When I attempt to unsubscribe "user@enlightsolutions.com" from the "Testing" list
   Then the unsubscription should be successful
 
