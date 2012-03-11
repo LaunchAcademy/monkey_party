@@ -1,0 +1,205 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://us4.api.mailchimp.com/1.2/?output=xml&apikey=<API KEY>&method=lists
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 11 Mar 2012 03:00:54 GMT
+      content-type:
+      - application/xml
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      x-powered-by:
+      - PHP/5.3.2
+      set-cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+      content-length:
+      - '938'
+    body:
+      encoding: US-ASCII
+      string: ! '<MCAPI type="array">
+
+        <struct key="0" type="array">
+
+        <id type="string">6ed27effda</id>
+
+        <web_id type="integer">47457</web_id>
+
+        <name type="string">Testing</name>
+
+        <date_created type="string">2012-03-11 03:00:40</date_created>
+
+        <member_count type="double">0</member_count>
+
+        <unsubscribe_count type="double">0</unsubscribe_count>
+
+        <cleaned_count type="double">0</cleaned_count>
+
+        <email_type_option type="boolean" />
+
+        <default_from_name type="string">Launchware</default_from_name>
+
+        <default_from_email type="string">dan.pickett+test@launchware.com</default_from_email>
+
+        <default_subject type="string">test</default_subject>
+
+        <default_language type="string">en</default_language>
+
+        <list_rating type="double">0</list_rating>
+
+        <member_count_since_send type="double">0</member_count_since_send>
+
+        <unsubscribe_count_since_send type="double">0</unsubscribe_count_since_send>
+
+        <cleaned_count_since_send type="double">0</cleaned_count_since_send>
+
+        </struct>
+
+        </MCAPI>'
+    http_version: '1.1'
+  recorded_at: Sun, 11 Mar 2012 03:00:54 GMT
+- request:
+    method: get
+    uri: http://us4.api.mailchimp.com/1.2/?output=xml&apikey=<API KEY>&id=6ed27effda&method=listBatchSubscribe&double_optin=true&update_existing=false&replace_interests=true&batch[0][EMAIL]=auser%40launchware.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 11 Mar 2012 03:00:55 GMT
+      content-type:
+      - application/xml
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      x-powered-by:
+      - PHP/5.3.2
+      set-cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+      content-length:
+      - '145'
+    body:
+      encoding: US-ASCII
+      string: ! '<MCAPI type="array">
+
+        <success_count type="integer">1</success_count>
+
+        <error_count type="integer">0</error_count>
+
+        <errors type="array" />
+
+        </MCAPI>'
+    http_version: '1.1'
+  recorded_at: Sun, 11 Mar 2012 03:00:55 GMT
+- request:
+    method: get
+    uri: http://us4.api.mailchimp.com/1.2/?output=xml&apikey=<API KEY>&id=6ed27effda&method=listBatchUnsubscribe&delete_member=true&send_goodbye=true&send_notify=false&emails[0]=auser%40launchware.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 11 Mar 2012 03:00:55 GMT
+      content-type:
+      - application/xml
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      x-powered-by:
+      - PHP/5.3.2
+      set-cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+      content-length:
+      - '145'
+    body:
+      encoding: US-ASCII
+      string: ! '<MCAPI type="array">
+
+        <success_count type="integer">1</success_count>
+
+        <error_count type="integer">0</error_count>
+
+        <errors type="array" />
+
+        </MCAPI>'
+    http_version: '1.1'
+  recorded_at: Sun, 11 Mar 2012 03:00:55 GMT
+- request:
+    method: get
+    uri: http://us4.api.mailchimp.com/1.2/?output=xml&apikey=<API KEY>&id=6ed27effda&method=listBatchSubscribe&double_optin=false&update_existing=false&replace_interests=true&batch[0][EMAIL]=auser%40launchware.com
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 11 Mar 2012 03:02:00 GMT
+      content-type:
+      - application/xml
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      x-powered-by:
+      - PHP/5.3.2
+      set-cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+      content-length:
+      - '145'
+    body:
+      encoding: US-ASCII
+      string: ! '<MCAPI type="array">
+
+        <success_count type="integer">1</success_count>
+
+        <error_count type="integer">0</error_count>
+
+        <errors type="array" />
+
+        </MCAPI>'
+    http_version: '1.1'
+  recorded_at: Sun, 11 Mar 2012 03:02:00 GMT
+recorded_with: VCR 2.0.0

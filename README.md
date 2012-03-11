@@ -28,7 +28,6 @@ Or install it yourself as:
 ## Usage
 
 ```ruby
-  account = MonkeyParty::Account.login("monkey_username", "party_password")
   list = MonkeyParty::List.find_by_name("list_name")
   list.create_subscribers([MonkeyParty::Subscriber.new("user@example.com")])
 ```

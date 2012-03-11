@@ -23,14 +23,14 @@ module MonkeyParty
         index += 1
       end
 
-      response = self.class.get("", :query => {
+      response = self.class.get("/", :query => {
          :apikey            => self.class.api_key,
          :id                => self.id,
          :method            => "listBatchSubscribe",
       }.merge(options).merge(batch_hash))
 
       #response[1] is the error count
-      if !response["MCAPI"].nil? && response["MCAPI"][1] > 0
+      if !response["MCAPI"].nil? && 
         attach_errors_to_subscribers(array_of_subscribers, response.body)
       end
 
@@ -50,13 +50,13 @@ module MonkeyParty
         batch_hash["emails[#{index}]"] = s.email
       end
 
-      response = self.class.get("", :query => {
+      response = self.class.get("/", :query => {
         :apikey => self.class.api_key,
         :id => self.id,
         :method => "listBatchUnsubscribe"
       }.merge(options).merge(batch_hash))
 
-      if !response["MCAPI"].nil? && response["MCAPI"][1] > 0
+      if !response["MCAPI"].nil?
         attach_errors_to_subscribers(array_of_unsubscribers, response.body)
       end
 
@@ -65,7 +65,7 @@ module MonkeyParty
 
     class << self
       def all
-        response = get("", :query => {
+        response = get("/", :query => {
           :apikey => api_key,
           :method => "lists"
         })
@@ -97,3 +97,4 @@ module MonkeyParty
     end
   end
 end
+

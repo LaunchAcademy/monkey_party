@@ -1,0 +1,135 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: http://us4.api.mailchimp.com/1.2/?output=xml&apikey=<API KEY>&method=lists
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 11 Mar 2012 03:00:56 GMT
+      content-type:
+      - application/xml
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      x-powered-by:
+      - PHP/5.3.2
+      set-cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+      content-length:
+      - '938'
+    body:
+      encoding: US-ASCII
+      string: ! '<MCAPI type="array">
+
+        <struct key="0" type="array">
+
+        <id type="string">6ed27effda</id>
+
+        <web_id type="integer">47457</web_id>
+
+        <name type="string">Testing</name>
+
+        <date_created type="string">2012-03-11 03:00:40</date_created>
+
+        <member_count type="double">0</member_count>
+
+        <unsubscribe_count type="double">0</unsubscribe_count>
+
+        <cleaned_count type="double">0</cleaned_count>
+
+        <email_type_option type="boolean" />
+
+        <default_from_name type="string">Launchware</default_from_name>
+
+        <default_from_email type="string">dan.pickett+test@launchware.com</default_from_email>
+
+        <default_subject type="string">test</default_subject>
+
+        <default_language type="string">en</default_language>
+
+        <list_rating type="double">0</list_rating>
+
+        <member_count_since_send type="double">0</member_count_since_send>
+
+        <unsubscribe_count_since_send type="double">0</unsubscribe_count_since_send>
+
+        <cleaned_count_since_send type="double">0</cleaned_count_since_send>
+
+        </struct>
+
+        </MCAPI>'
+    http_version: '1.1'
+  recorded_at: Sun, 11 Mar 2012 03:00:56 GMT
+- request:
+    method: get
+    uri: http://us4.api.mailchimp.com/1.2/?output=xml&apikey=<API KEY>&id=6ed27effda&method=listBatchSubscribe&double_optin=true&update_existing=false&replace_interests=true&batch[0][EMAIL]=badEmail
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      connection:
+      - close
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/0.7.65
+      date:
+      - Sun, 11 Mar 2012 03:00:56 GMT
+      content-type:
+      - application/xml
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      x-powered-by:
+      - PHP/5.3.2
+      set-cookie:
+      - _AVESTA_ENVIRONMENT=prod; path=/
+      content-length:
+      - '354'
+    body:
+      encoding: US-ASCII
+      string: ! '<MCAPI type="array">
+
+        <success_count type="integer">0</success_count>
+
+        <error_count type="integer">1</error_count>
+
+        <errors type="array">
+
+        <struct key="0" type="array">
+
+        <code type="integer">502</code>
+
+        <message type="string">Invalid Email Address: badEmail</message>
+
+        <row type="array">
+
+        <EMAIL type="string">badEmail</EMAIL>
+
+        </row>
+
+        </struct>
+
+        </errors>
+
+        </MCAPI>'
+    http_version: '1.1'
+  recorded_at: Sun, 11 Mar 2012 03:00:56 GMT
+recorded_with: VCR 2.0.0

@@ -7,3 +7,4 @@ module MonkeyParty
     element :code, Integer
   end
 end
+

@@ -1,13 +1,13 @@
 begin
-  require 'cucumber'
-  require 'cucumber/rake/task'
+  require 'rspec/core/rake_task'
 
-  Cucumber::Rake::Task.new(:cucumber) do |t|
-    t.cucumber_opts = "--format pretty" # Any valid command line option can go here.
+  desc "Run specs"
+  RSpec::Core::RakeTask.new do |t|
   end
 
+  task default: :spec
 rescue LoadError
-  puts "Cucumber not installed. You will not be able to run features"
+  puts "RSpec is not installed"
 end
 
 #!/usr/bin/env rake

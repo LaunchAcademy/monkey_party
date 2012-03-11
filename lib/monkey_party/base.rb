@@ -1,14 +1,13 @@
 module MonkeyParty
   class Base
     include HTTParty
-    base_uri 'http://api.mailchimp.com/1.2/'
     default_params :output => "xml"
 
     def initialize(attrs = {})
       attrs.each{ |key, value| self.send("#{key}=", value) }
     end
 
-    class << self
+    class << self  
       def get(path, options = {})
         #fix the format because Mail Chimp doesn't pass the proper header
         options[:format] = :xml
@@ -21,9 +20,15 @@ module MonkeyParty
       end
 
       def api_key
-        configatron.mailchimp.api_key
+        MonkeyParty.api_key
       end
 
+      def default_options
+        {
+          :base_uri => "http://#{MonkeyParty.data_center}.api.mailchimp.com/1.2"
+        }
+      end
     end
   end
 end
+
