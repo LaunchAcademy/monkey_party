@@ -14,7 +14,11 @@ module MonkeyParty
   end
 
   def self.data_center
-    @data_center
+    @data_center || default_data_center
+  end
+
+  def self.data_center
+    "us1"
   end
 end
 
