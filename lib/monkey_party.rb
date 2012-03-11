@@ -6,7 +6,7 @@ module MonkeyParty
   end
 
   def self.api_key
-    @api_key
+    @api_key || ENV["MCAPI_KEY"]
   end
 
   def self.data_center=(data_center)
