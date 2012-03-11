@@ -3,9 +3,9 @@ require File.expand_path('../lib/monkey_party/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Dan Pickett"]
-  gem.email         = ["dpickett@enlightsolutions.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.email         = ["dan.pickett@launchware.com"]
+  gem.description   = %q{A web wrapper for mailchimp}
+  gem.summary       = %q{A web wrapper for mailchimp}
   gem.homepage      = ""
 
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
