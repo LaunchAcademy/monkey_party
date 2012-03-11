@@ -10,17 +10,17 @@ module MonkeyParty
 
     def to_h
       {
-        :email => self.email
-      }.merge(self.merge_fields)
+        :email => self.email,
+      }.merge(self.merge_fields).tap do |h|
+        h[:error] = self.error.to_h if self.error
+      end
     end
 
     def to_mailchimp_hash
-      chimp_hash = {}
-      self.to_h.each do |key, value|
-        chimp_hash[key.to_s.upcase[0..9]] = value
+      self.to_h.keys.inject({}) do |chimp_hash, key|
+        chimp_hash[key.to_s.upcase[0..9]] = self.to_h[key] unless key == :error
+        chimp_hash
       end
-
-      chimp_hash
     end
 
     def valid?
