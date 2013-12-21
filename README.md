@@ -1,6 +1,6 @@
 # MonkeyParty
 
-[![Build Status](https://secure.travis-ci.org/EnlightSolutions/monkey_party.png)](http://travis-ci.org/EnlightSolutions/monkey_party)
+[![Build Status](https://secure.travis-ci.org/EnlightSolutions/monkey_party.png)](http://travis-ci.org/LaunchAcademy/monkey_party)
 
 An extremely young API for interacting with the MailChimp API
 
