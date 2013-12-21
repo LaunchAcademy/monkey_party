@@ -13,15 +13,15 @@ end
 
 VCR.configure do |c|
   c.cassette_library_dir = 'spec/cassettes'
-  c.hook_into :fakeweb
+  c.hook_into :webmock
   c.configure_rspec_metadata!
   c.register_request_matcher :mailchimp_matcher do |req1, req2|
     mailchimp_matcher.call(req1, req2)
-  end 
+  end
 
   c.default_cassette_options = {
     :match_requests_on => [:method, :mailchimp_matcher],
-    :record => :new_episodes 
+    :record => :new_episodes
   }
   c.filter_sensitive_data('<API KEY>') { MonkeyParty.api_key }
 end
