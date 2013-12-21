@@ -5,8 +5,8 @@ describe MonkeyParty::Subscriber do
   let(:subscriber) { MonkeyParty::Subscriber.new(email) }
 
   it "serializes to a mailchimp hash" do
-    subscriber.to_mailchimp_hash.keys.should include("EMAIL")
-    subscriber.to_mailchimp_hash["EMAIL"].should eql(email)
+    expect(subscriber.to_mailchimp_hash.keys).to include("EMAIL")
+    expect(subscriber.to_mailchimp_hash["EMAIL"]).to eq(email)
   end
 end
 

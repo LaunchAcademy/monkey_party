@@ -14,7 +14,7 @@ describe MonkeyParty::List, :vcr do
 
     it "subscribes someone successfully" do
       subs = list.create_subscribers([subscriber], :double_optin => false)
-      subs[0].should be_valid
+      expect(subs[0]).to be_valid
 
       #clean up after yourself
       list.destroy_subscribers([subs[0]], :delete_member => true)
@@ -22,7 +22,7 @@ describe MonkeyParty::List, :vcr do
 
     it "handles errors gracefully" do
       subs = list.create_subscribers([bad_subscriber])
-      subs[0].should_not be_valid
+      expect(subs[0]).to_not be_valid
     end
 
   end
@@ -34,9 +34,9 @@ describe MonkeyParty::List, :vcr do
 
     it 'should have valid subscribers' do
       subs = list.create_subscribers([subscriber], :double_optin => false)
-      subs[0].should be_valid
+      expect(subs[0]).to be_valid
       subs = list.destroy_subscribers([subscriber])
-      subs[0].should be_valid
+      expect(subs[0]).to be_valid
     end
   end
 end
